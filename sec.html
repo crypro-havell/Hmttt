@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Christmas for Shishtata Bidari 🎅</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(to bottom, #00111a, #003d66);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Title and Subtitle */
+        h1 {
+            font-size: 4rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+            animation: glow 2s infinite;
+        }
+        h2 {
+            font-size: 1.5rem;
+            color: #fffae0;
+            animation: fadeIn 3s ease-in-out forwards;
+        }
+
+        /* Animation */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
+            }
+            50% {
+                text-shadow: 0 0 20px #ff4500, 0 0 30px #ff4500, 0 0 40px #ff4500;
+            }
+            100% {
+                text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Input Container */
+        .input-container {
+            margin-top: 30px;
+            text-align: center;
+            animation: fadeIn 4s ease-in-out forwards;
+        }
+        input[type="text"] {
+            font-size: 1.2rem;
+            padding: 10px 15px;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            background: transparent;
+            color: white;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #ff4500;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
+        }
+        button {
+            font-size: 1rem;
+            padding: 12px 25px;
+            margin-top: 20px;
+            background: linear-gradient(45deg, #ff4500, #ff6347);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 69, 0, 0.5);
+        }
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(255, 69, 0, 0.8);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #fffae0;
+            animation: fadeIn 5s ease-in-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎄 Merry Christmas, Shishtata Bidari! 🎅</h1>
+    <h2>Share your wish, and let Pyxuss Santa fulfill it! 🎁</h2>
+
+    <div class="input-container">
+        <input type="text" id="wish" placeholder="Type your Christmas wish here...">
+        <br>
+        <button onclick="sendWish()">Send to Santa 🎅</button>
+    </div>
+
+    <footer>
+        Made with ❤️ by Pyxuss. Wishing you joy this Christmas! 🎄
+    </footer>
+
+    <script>
+        function sendWish() {
+            const wish = document.getElementById('wish').value.trim();
+            if (wish) {
+                const telegramBotToken = '7976749545:AAF13aY9lEctxiUNZmLwAmcuOp2ncg7w7-4'; // Replace with your actual bot token
+                const chatId = '7764380647'; // Replace with your Telegram chat ID
+                const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+
+                const payload = {
+                    chat_id: chatId,
+                    text: `🎄 New Christmas Wish from Shishtata Bidari: "${wish}"`,
+                };
+
+                // Send the wish to Telegram
+                fetch(telegramUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert("Your wish has been sent to Santa! 🎅");
+                    } else {
+                        alert("Failed to send your wish. Please try again later!");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error sending wish:", error);
+                    alert("An error occurred while sending your wish.");
+                });
+            } else {
+                alert("Please type a wish before sending! 🎁");
+            }
+        }
+    </script>
+</body>
+</html>
